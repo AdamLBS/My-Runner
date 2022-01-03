@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2021
-** B-MUL-100-MAR-1-1-myrunner-adam.elaoumari
-** File description:
-** main
-*/
-
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Sprite.h>
@@ -12,11 +5,7 @@
 #include <SFML/Audio/Sound.h>
 #include <SFML/Audio.h>
 #include "framebuffer.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "structure.h"
 #include "my.h"
-
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
 {
     framebuffer_t *frame;
@@ -27,35 +16,39 @@ framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
     return frame;
 }
 
-void main(void)
+void create_window(framebuffer_t *framebuffer, sfRenderWindow *window)
 {
-    sfRenderWindow *window;
+    sfVideoMode mode = {1920, 1080, 32};
+    framebuffer = framebuffer_create(1920, 1080);
+    window = sfRenderWindow_create(mode, "Test", sfResize | sfClose, NULL);
+    sfWindow_setFramerateLimit(window, 60);
+
+}
+
+
+int main(void)
+{
+    sfClock *clock = sfClock_create();
     framebuffer_t *framebuffer;
+    sfRenderWindow *window;
     sfVideoMode mode = {1920, 1080, 32};
     framebuffer = framebuffer_create(1920, 1080);
     window = sfRenderWindow_create(mode, "My Runner", sfResize | sfClose, NULL);
-    sfRenderWindow_setFramerateLimit(window, 60);
-        struct game_object *my_obj, *my_obj3, *my_obj2, *my_obj4, *my_obj5;
-
-            sfVector2f vec = {0, 0};
-            sfVector2f vec2 = {0,0};
-            sfIntRect rect;
-            sfIntRect rect2;
-            sfIntRect rect3;
-
-        my_obj = create_object("back/1.png", vec2, rect2);
-        my_obj4 = create_object("back/4.png", vec2, rect2);
-        my_obj5 = create_object("back/5.png", vec2, rect2);
-        my_obj2 = create_object("back/2.png", vec2, rect2);
-                my_obj3 = create_object("back/3.png", vec2, rect2);
+    sfWindow_setFramerateLimit(window, 60);
+    t_all_par *par = create_all_bg(window);
+    t_obj *obj = create_player("sprite.png");
+    t_obstacle *obj2 = create_obstacle("tree.png");
+    sfEvent event;
     while (sfRenderWindow_isOpen(window)) {
 
-        sfRenderWindow_drawSprite(window, my_obj->sprite, NULL);
-
-        sfRenderWindow_drawSprite(window, my_obj2->sprite, NULL);
-                sfRenderWindow_drawSprite(window, my_obj3->sprite, NULL);
-                sfRenderWindow_drawSprite(window, my_obj4->sprite, NULL);
-                sfRenderWindow_drawSprite(window, my_obj5->sprite, NULL);
-                sfRenderWindow_display(window);
+        draw_all_bg(window, par);
+       sfRenderWindow_drawSprite(window, obj->sprite, NULL);
+       move_player(obj, par->clock5);
+       gestion_event(obj, event, window);
+       update(obj, sfClock_restart(clock).microseconds/ 1000000.f);
+       sfRenderWindow_drawSprite(window, obj2->sprite, NULL);
+       move_obstacle(obj2, 3, par->clock1);
+        sfRenderWindow_display(window);
     }
+    
 }

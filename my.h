@@ -1,14 +1,60 @@
 /*
-** EPITECH PROJECT, 2021
-** B-MUL-100-MAR-1-1-myrunner-adam.elaoumari
+** EPITECH PROJECT, 2022
+** test_parallax
 ** File description:
 ** my
 */
-
-#include "structure.h"
+#include <SFML/Graphics/RenderWindow.h>
+#include <SFML/Graphics/Texture.h>
+#include <SFML/Graphics/Sprite.h>
+#include <SFML/Audio/SoundBuffer.h>
+#include <SFML/Audio/Sound.h>
+#include <SFML/Audio.h>
 #ifndef MY_H_
-#define MY_H_
-struct game_object *create_object(const char *path, sfVector2f pos, sfIntRect rect);
-sfSprite *create_sprite(t_object *obj);
+    #define MY_H_
 
+struct parallax {
+    sfClock *clock;
+    sfTime *time;
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfIntRect rect;
+    sfVector2f scale;
+} typedef t_bg;
+
+struct all_parallax {
+    t_bg *bg1;
+    t_bg *bg2;
+    t_bg *bg3;
+    t_bg *bg4;
+    sfClock *clock1;
+    sfClock *clock2;
+    sfClock *clock3;
+    sfClock *clock4;
+    sfClock *clock5;
+}typedef t_all_par;
+
+struct object {
+    sfClock *clock;
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfIntRect rect;
+    float weight;
+    sfVector2f pos;
+    sfVector2f velocity;
+} typedef t_obj;
+
+struct obstacle {
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfIntRect rect;
+    sfVector2f pos;
+    sfVector2f scale;
+} typedef t_obstacle;
+
+struct parallax *create_bg (char *path);
+sfSprite *create_sprite(t_bg *obj);
+t_all_par *create_all_bg(sfWindow *window);
+t_obj *create_player(char *path);
+t_obstacle *create_obstacle(char *path);
 #endif /* !MY_H_ */

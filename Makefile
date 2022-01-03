@@ -8,8 +8,10 @@
 NAME = my_runner
 
 SRC =	main.c \
-		create.c \
-		destroy.c \
+		parallax.c \
+		player.c \
+		jump.c \
+		obstacle.c \
 
 OBJ = $(SRC:.c=.o)
 
