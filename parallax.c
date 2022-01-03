@@ -39,10 +39,10 @@ sfSprite *create_sprite(t_bg *obj)
 
 t_all_par *create_all_bg(sfWindow *window)
 {
-    t_bg *bg1 = create_bg("parallax-demon-woods-bg.png");
-    t_bg *bg2 = create_bg("parallax-demon-woods-close-trees.png");
-    t_bg *bg3 = create_bg("parallax-demon-woods-far-trees.png");
-    t_bg *bg4 = create_bg("parallax-demon-woods-mid-trees.png");
+    t_bg *bg1 = create_bg("bg.png");
+    t_bg *bg2 = create_bg("close.png");
+    t_bg *bg3 = create_bg("far.png");
+    t_bg *bg4 = create_bg("mid.png");
     t_all_par *par = malloc(sizeof(t_all_par));
     par->bg1 = malloc(sizeof(t_bg));
     par->bg1 = bg1;

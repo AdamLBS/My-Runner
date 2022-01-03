@@ -10,6 +10,7 @@
 #include <SFML/Audio/SoundBuffer.h>
 #include <SFML/Audio/Sound.h>
 #include <SFML/Audio.h>
+#include "stdlib.h"
 #ifndef MY_H_
     #define MY_H_
 

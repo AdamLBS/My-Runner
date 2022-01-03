@@ -12,6 +12,7 @@ SRC =	main.c \
 		player.c \
 		jump.c \
 		obstacle.c \
+		has_touched.c \
 
 OBJ = $(SRC:.c=.o)
 

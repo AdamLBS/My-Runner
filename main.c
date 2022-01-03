@@ -5,12 +5,6 @@
 ** main
 */
 
-#include <SFML/Graphics/RenderWindow.h>
-#include <SFML/Graphics/Texture.h>
-#include <SFML/Graphics/Sprite.h>
-#include <SFML/Audio/SoundBuffer.h>
-#include <SFML/Audio/Sound.h>
-#include <SFML/Audio.h>
 #include "framebuffer.h"
 #include "my.h"
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
