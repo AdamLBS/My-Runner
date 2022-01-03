@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2022
+** B-MUL-100-MAR-1-1-myrunner-adam.elaoumari
+** File description:
+** main
+*/
+
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Sprite.h>
