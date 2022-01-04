@@ -6,7 +6,7 @@
 */
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Texture.h>
-#include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics.h>
 #include <SFML/Audio/SoundBuffer.h>
 #include <SFML/Audio/Sound.h>
 #include <SFML/Audio.h>
@@ -55,7 +55,13 @@ struct obstacle {
     sfVector2f pos;
     sfVector2f scale;
     struct obstacle *next;
+    int type;
 } typedef t_obstacle;
+
+struct text {
+    sfFont *font;
+    sfText *text;
+} typedef t_text;
 
 struct parallax *create_bg (char *path);
 sfSprite *create_sprite(t_bg *obj);
@@ -68,4 +74,8 @@ sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock);
 void collision(t_obstacle *list, t_obj *player);
 char *openfile(char *filepath);
 void generate_obstacle(char *map, t_obstacle **list);
+t_obstacle *create_portal(char *path, int x);
+void append_portal(char *path, t_obstacle **list, int pos);
+void end(t_obstacle *list, t_obj *player, sfRenderWindow *window);
+t_text *create_text(char *text, int size);
 #endif /* !MY_H_ */

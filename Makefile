@@ -16,6 +16,8 @@ SRC =	main.c \
 		map.c \
 		my_putstr.c \
 		my_putchar.c \
+		portal.c \
+		text.c \
 
 OBJ = $(SRC:.c=.o)
 

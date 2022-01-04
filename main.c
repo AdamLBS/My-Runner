@@ -45,6 +45,8 @@ int main(void)
       //  append_obstacle("tree.png", &list, 3000);
        // append_obstacle("tree.png", &list, 6000);
    // test(&list);
+       sfVector2f scale = {1920.0, 1080.0};
+
     framebuffer_t *framebuffer;
     sfRenderWindow *window;
     sfVideoMode mode = {1920, 1080, 32};
@@ -53,21 +55,22 @@ int main(void)
     sfWindow_setFramerateLimit(window, 60);
     t_all_par *par = create_all_bg(window);
     t_obj *obj = create_player("sprite.png");
-  //  t_obstacle *obj2 = create_obstacle("tree.png");
     sfEvent event;
+       t_text *test = create_text("Score is 1", 50);
        generate_obstacle(file, &list);
-
     while (sfRenderWindow_isOpen(window)) {
-
         collision(list, obj);
         draw_all_bg(window, par);
-       sfRenderWindow_drawSprite(window, obj->sprite, NULL);
        move_player(obj, par->clock5);
        gestion_event(obj, event, window);
        update(obj, sfClock_restart(clock).microseconds/ 1000000.f);
+       sfRenderWindow_drawSprite(window, obj->sprite, NULL);
        draw_all_obstacle(window, list, par);
        move_all_obstacle(window, list, par);
+       end(list, obj, window);
       // move_obstacle(obj2, 3, par->clock1);
+        sfRenderWindow_drawText(window, test->text, NULL);
+
         sfRenderWindow_display(window);
     }
     

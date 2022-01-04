@@ -10,11 +10,38 @@
 void generate_obstacle(char *map, t_obstacle **list)
 {
     int x = 1200;
+    int tmp;
     for (int i = 0; map[i] != '\0'; i++) {
         if (map[i] == '1') {
         append_obstacle("tree.png", list, x);
         x += 1000;
         }
+        if (map[i] == '2') {
+            append_portal("portal.png", list, x);
+        }
+        if (map[i] == '3') {
+            tmp = x + 200;
+            append_obstacle("tree.png", list, x);
+            append_obstacle("tree.png", list, tmp);
+            x += 1000;
+        }
+    }
+}
+
+void append_portal(char *path, t_obstacle **list, int pos)
+{
+    t_obstacle *new_node = malloc(sizeof(t_obstacle));
+    new_node = create_portal("portal.png", pos);
+    new_node->type = 2;
+    new_node->next = NULL;
+    if (*list == NULL)
+        *list = new_node;
+    else {
+        t_obstacle *last = *list;
+        while (last->next != NULL){
+            last = last->next;
+        }
+        last->next = new_node;
     }
 }
 
@@ -44,6 +71,7 @@ void append_obstacle(char *path, t_obstacle **list, int pos)
 {
     t_obstacle *new_node = malloc(sizeof(t_obstacle));
     new_node = create_obstacle("tree.png", pos);
+    new_node->type = 1;
     new_node->next = NULL;
     if (*list == NULL)
         *list = new_node;
@@ -54,7 +82,6 @@ void append_obstacle(char *path, t_obstacle **list, int pos)
         }
         last->next = new_node;
     }
-    
 }
 
 t_obstacle *create_obstacle(char *path, int x)
