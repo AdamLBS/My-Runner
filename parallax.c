@@ -37,13 +37,13 @@ sfSprite *create_sprite(t_bg *obj)
     return (obj->sprite);
 }
 
-t_all_par *create_all_bg(sfWindow *window)
+t_par *create_all_bg(sfWindow *window)
 {
     t_bg *bg1 = create_bg("bg.png");
     t_bg *bg2 = create_bg("close.png");
     t_bg *bg3 = create_bg("far.png");
     t_bg *bg4 = create_bg("mid.png");
-    t_all_par *par = malloc(sizeof(t_all_par));
+    t_par *par = malloc(sizeof(t_par));
     par->bg1 = malloc(sizeof(t_bg));
     par->bg1 = bg1;
     par->bg2 = bg2;
@@ -54,10 +54,12 @@ t_all_par *create_all_bg(sfWindow *window)
     par->clock3 = sfClock_create();
     par->clock4 = sfClock_create();
     par->clock5 = sfClock_create();
+    par->clock6 = sfClock_create();
+    par->score = 0;
     return par;
 }
 
-void draw_all_bg(sfWindow *window, t_all_par *par)
+void draw_all_bg(sfWindow *window, t_par *par)
 {
     sfRenderWindow_drawSprite(window, par->bg1->sprite, NULL);
     sfRenderWindow_drawSprite(window, par->bg3->sprite, NULL);

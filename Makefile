@@ -18,6 +18,10 @@ SRC =	main.c \
 		my_putchar.c \
 		portal.c \
 		text.c \
+		my_itoa.c \
+		my_revstr.c \
+		score.c \
+		my_strcat.c \
 
 OBJ = $(SRC:.c=.o)
 

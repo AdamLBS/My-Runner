@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-char *openfile(char *filepath)
+char *openfile(int ac, char *filepath)
 {
     int fd = open(filepath, O_RDONLY);
     int bytes = 10000;

@@ -36,7 +36,9 @@ struct all_parallax {
     sfClock *clock3;
     sfClock *clock4;
     sfClock *clock5;
-}typedef t_all_par;
+    sfClock *clock6;
+    int score;
+}typedef t_par;
 
 struct object {
     sfClock *clock;
@@ -65,17 +67,19 @@ struct text {
 
 struct parallax *create_bg (char *path);
 sfSprite *create_sprite(t_bg *obj);
-t_all_par *create_all_bg(sfWindow *window);
+t_par *create_all_bg(sfWindow *window);
 t_obj *create_player(char *path);
 t_obstacle *create_obstacle(char *path, int x);
 void append_obstacle(char *path, t_obstacle **list, int pos);
-void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par);
+void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par);
 sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock);
 void collision(t_obstacle *list, t_obj *player);
-char *openfile(char *filepath);
+char *openfile(int ac, char *filepath);
 void generate_obstacle(char *map, t_obstacle **list);
 t_obstacle *create_portal(char *path, int x);
 void append_portal(char *path, t_obstacle **list, int pos);
 void end(t_obstacle *list, t_obj *player, sfRenderWindow *window);
 t_text *create_text(char *text, int size);
+int get_intlen(int val);
+char *my_itoa(int val, char *buffer);
 #endif /* !MY_H_ */

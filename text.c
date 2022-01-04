@@ -14,7 +14,6 @@ t_text *create_text(char *text, int size)
     txt->font = sfFont_createFromFile("font.ttf");
     sfText_setFont(txt->text, txt->font);
     sfText_setCharacterSize(txt->text, size);
- 
     sfText_setString(txt->text, text);
     return txt;
 }

@@ -13,8 +13,8 @@ void generate_obstacle(char *map, t_obstacle **list)
     int tmp;
     for (int i = 0; map[i] != '\0'; i++) {
         if (map[i] == '1') {
-        append_obstacle("tree.png", list, x);
-        x += 1000;
+            append_obstacle("tree.png", list, x);
+            x += 1000;
         }
         if (map[i] == '2') {
             append_portal("portal.png", list, x);
@@ -45,7 +45,7 @@ void append_portal(char *path, t_obstacle **list, int pos)
     }
 }
 
-void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par)
+void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par)
 {
     while (list != NULL) {
        sfRenderWindow_drawSprite(window, list->sprite, NULL);
@@ -53,7 +53,7 @@ void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par)
     }
 }
 
-void move_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par)
+void move_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par)
 {
     sfVector2f pos;
     t_obstacle *tmp = list;
@@ -109,7 +109,7 @@ sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock)
     seconds = time.microseconds / 1000000.0;
     if (seconds > 0.01) {
         bg->pos.x = bg->pos.x - 10;
-            return bg->pos;
+        return bg->pos;
     }
 }
 

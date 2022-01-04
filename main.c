@@ -17,15 +17,6 @@ framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
     return frame;
 }
 
-void create_window(framebuffer_t *framebuffer, sfRenderWindow *window)
-{
-    sfVideoMode mode = {1920, 1080, 32};
-    framebuffer = framebuffer_create(1920, 1080);
-    window = sfRenderWindow_create(mode, "Test", sfResize | sfClose, NULL);
-    sfWindow_setFramerateLimit(window, 60);
-
-}
-
 int test(t_obstacle *list)
 {
     int i = 4;
@@ -36,42 +27,39 @@ int test(t_obstacle *list)
     }
 }
 
-
-int main(void)
+sfRenderWindow *create_window(void)
 {
-    char *file = openfile("map.txt");
-    t_obstacle *list = NULL;
-    sfClock *clock = sfClock_create();
-      //  append_obstacle("tree.png", &list, 3000);
-       // append_obstacle("tree.png", &list, 6000);
-   // test(&list);
-       sfVector2f scale = {1920.0, 1080.0};
-
-    framebuffer_t *framebuffer;
     sfRenderWindow *window;
     sfVideoMode mode = {1920, 1080, 32};
-    framebuffer = framebuffer_create(1920, 1080);
     window = sfRenderWindow_create(mode, "My Runner", sfResize | sfClose, NULL);
     sfWindow_setFramerateLimit(window, 60);
-    t_all_par *par = create_all_bg(window);
+    return window;
+}
+
+
+int main(int ac, char **av)
+{
+    char *file = openfile(ac, av[1]);
+    t_obstacle *list = NULL;
+    sfClock *clock = sfClock_create();
+    sfRenderWindow *window = create_window();
+    t_par *par = create_all_bg(window);
     t_obj *obj = create_player("sprite.png");
     sfEvent event;
-       t_text *test = create_text("Score is 1", 50);
-       generate_obstacle(file, &list);
+    t_text *test = create_text("Score is 0", 50);
+    generate_obstacle(file, &list);
     while (sfRenderWindow_isOpen(window)) {
         collision(list, obj);
         draw_all_bg(window, par);
-       move_player(obj, par->clock5);
-       gestion_event(obj, event, window);
-       update(obj, sfClock_restart(clock).microseconds/ 1000000.f);
-       sfRenderWindow_drawSprite(window, obj->sprite, NULL);
-       draw_all_obstacle(window, list, par);
-       move_all_obstacle(window, list, par);
-       end(list, obj, window);
-      // move_obstacle(obj2, 3, par->clock1);
+        move_player(obj, par->clock5);
+        gestion_event(obj, event, window);
+        update(obj, sfClock_restart(clock).microseconds/ 1000000.f);
+        sfRenderWindow_drawSprite(window, obj->sprite, NULL);
+        draw_all_obstacle(window, list, par);
+        move_all_obstacle(window, list, par);
+        end(list, obj, window);
+        update_score(par, test); 
         sfRenderWindow_drawText(window, test->text, NULL);
-
         sfRenderWindow_display(window);
     }
-    
 }
