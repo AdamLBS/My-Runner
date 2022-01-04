@@ -13,6 +13,9 @@ SRC =	main.c \
 		jump.c \
 		obstacle.c \
 		has_touched.c \
+		map.c \
+		my_putstr.c \
+		my_putchar.c \
 
 OBJ = $(SRC:.c=.o)
 

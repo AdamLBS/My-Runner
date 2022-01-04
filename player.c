@@ -11,7 +11,7 @@ t_obj *create_player(char *path)
 {
     sfIntRect rect;
     sfVector2f pos = {0, 847};
-    rect.width = 233;
+    rect.width = 200;
     rect.height = 233;
     rect.left = 0;
     rect.top = 0;
@@ -24,7 +24,7 @@ t_obj *create_player(char *path)
     sfSprite_setPosition(obj->sprite, pos);
     obj->clock = sfClock_create();
     obj->pos = pos;
-    obj->weight = 400;
+    obj->weight = 200;
     return obj;
 }
 

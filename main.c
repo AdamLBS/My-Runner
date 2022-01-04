@@ -4,9 +4,9 @@
 ** File description:
 ** main
 */
-
 #include "framebuffer.h"
 #include "my.h"
+
 framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
 {
     framebuffer_t *frame;
@@ -39,10 +39,11 @@ int test(t_obstacle *list)
 
 int main(void)
 {
+    char *file = openfile("map.txt");
     t_obstacle *list = NULL;
     sfClock *clock = sfClock_create();
-        append_obstacle("tree.png", &list, 3000);
-        append_obstacle("tree.png", &list, 6000);
+      //  append_obstacle("tree.png", &list, 3000);
+       // append_obstacle("tree.png", &list, 6000);
    // test(&list);
     framebuffer_t *framebuffer;
     sfRenderWindow *window;
@@ -54,7 +55,10 @@ int main(void)
     t_obj *obj = create_player("sprite.png");
   //  t_obstacle *obj2 = create_obstacle("tree.png");
     sfEvent event;
+       generate_obstacle(file, &list);
+
     while (sfRenderWindow_isOpen(window)) {
+
         collision(list, obj);
         draw_all_bg(window, par);
        sfRenderWindow_drawSprite(window, obj->sprite, NULL);

@@ -10,6 +10,9 @@
 #include <SFML/Audio/SoundBuffer.h>
 #include <SFML/Audio/Sound.h>
 #include <SFML/Audio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "stdlib.h"
 #ifndef MY_H_
     #define MY_H_
@@ -63,4 +66,6 @@ void append_obstacle(char *path, t_obstacle **list, int pos);
 void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par);
 sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock);
 void collision(t_obstacle *list, t_obj *player);
+char *openfile(char *filepath);
+void generate_obstacle(char *map, t_obstacle **list);
 #endif /* !MY_H_ */

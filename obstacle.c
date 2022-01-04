@@ -7,6 +7,17 @@
 
 #include "my.h"
 
+void generate_obstacle(char *map, t_obstacle **list)
+{
+    int x = 1200;
+    for (int i = 0; map[i] != '\0'; i++) {
+        if (map[i] == '1') {
+        append_obstacle("tree.png", list, x);
+        x += 1000;
+        }
+    }
+}
+
 void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par)
 {
     while (list != NULL) {
@@ -50,9 +61,9 @@ t_obstacle *create_obstacle(char *path, int x)
 {
     t_obstacle *obj = malloc(sizeof(t_obstacle));
     obj->texture = sfTexture_createFromFile(path, NULL);
-    sfVector2f pos = {x, 874};
+    sfVector2f pos = {x, 885};
     obj->rect.width = 190;
-    obj->rect.height = 206;
+    obj->rect.height = 200;
     obj->rect.left = 0;
     obj->rect.top = 0;
     obj->sprite = sfSprite_create();
