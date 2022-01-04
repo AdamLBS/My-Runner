@@ -26,10 +26,24 @@ void create_window(framebuffer_t *framebuffer, sfRenderWindow *window)
 
 }
 
+int test(t_obstacle *list)
+{
+    int i = 4;
+    int pos = 3000;
+    while (i != 0) {
+        pos += 1000;
+        i--;
+    }
+}
+
 
 int main(void)
 {
+    t_obstacle *list = NULL;
     sfClock *clock = sfClock_create();
+        append_obstacle("tree.png", &list, 3000);
+        append_obstacle("tree.png", &list, 6000);
+   // test(&list);
     framebuffer_t *framebuffer;
     sfRenderWindow *window;
     sfVideoMode mode = {1920, 1080, 32};
@@ -38,7 +52,7 @@ int main(void)
     sfWindow_setFramerateLimit(window, 60);
     t_all_par *par = create_all_bg(window);
     t_obj *obj = create_player("sprite.png");
-    t_obstacle *obj2 = create_obstacle("tree.png");
+  //  t_obstacle *obj2 = create_obstacle("tree.png");
     sfEvent event;
     while (sfRenderWindow_isOpen(window)) {
 
@@ -47,8 +61,9 @@ int main(void)
        move_player(obj, par->clock5);
        gestion_event(obj, event, window);
        update(obj, sfClock_restart(clock).microseconds/ 1000000.f);
-       sfRenderWindow_drawSprite(window, obj2->sprite, NULL);
-       move_obstacle(obj2, 3, par->clock1);
+       draw_all_obstacle(window, list, par);
+       move_all_obstacle(window, list, par);
+      // move_obstacle(obj2, 3, par->clock1);
         sfRenderWindow_display(window);
     }
     

@@ -51,11 +51,15 @@ struct obstacle {
     sfIntRect rect;
     sfVector2f pos;
     sfVector2f scale;
+    struct obstacle *next;
 } typedef t_obstacle;
 
 struct parallax *create_bg (char *path);
 sfSprite *create_sprite(t_bg *obj);
 t_all_par *create_all_bg(sfWindow *window);
 t_obj *create_player(char *path);
-t_obstacle *create_obstacle(char *path);
+t_obstacle *create_obstacle(char *path, int x);
+void append_obstacle(char *path, t_obstacle **list, int pos);
+void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par);
+sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock);
 #endif /* !MY_H_ */
