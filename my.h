@@ -62,4 +62,5 @@ t_obstacle *create_obstacle(char *path, int x);
 void append_obstacle(char *path, t_obstacle **list, int pos);
 void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_all_par *par);
 sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock);
+void collision(t_obstacle *list, t_obj *player);
 #endif /* !MY_H_ */

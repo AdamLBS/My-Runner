@@ -55,7 +55,7 @@ int main(void)
   //  t_obstacle *obj2 = create_obstacle("tree.png");
     sfEvent event;
     while (sfRenderWindow_isOpen(window)) {
-
+        collision(list, obj);
         draw_all_bg(window, par);
        sfRenderWindow_drawSprite(window, obj->sprite, NULL);
        move_player(obj, par->clock5);
