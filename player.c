@@ -4,7 +4,6 @@
 ** File description:
 ** create_object
 */
-
 #include "my.h"
 
 t_obj *create_player(char *path)

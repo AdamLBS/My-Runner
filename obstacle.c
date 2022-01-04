@@ -48,8 +48,8 @@ void append_portal(char *path, t_obstacle **list, int pos)
 void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par)
 {
     while (list != NULL) {
-       sfRenderWindow_drawSprite(window, list->sprite, NULL);
-       list = list->next;
+        sfRenderWindow_drawSprite(window, list->sprite, NULL);
+        list = list->next;
     }
 }
 
@@ -58,10 +58,10 @@ void move_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par)
     sfVector2f pos;
     t_obstacle *tmp = list;
     while (list != NULL) {
-       pos = move_obstacle(list, 3, par->clock1);
-       list->pos = pos;
-       sfSprite_setPosition(list->sprite, pos);
-       list = list->next;
+        pos = move_obstacle(list, 3, par->clock1);
+        list->pos = pos;
+        sfSprite_setPosition(list->sprite, pos);
+        list = list->next;
     }
     if (list == NULL)
         list = tmp;
@@ -112,4 +112,3 @@ sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock)
         return bg->pos;
     }
 }
-

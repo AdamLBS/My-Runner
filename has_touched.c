@@ -7,7 +7,6 @@
 
 #include "my.h"
 
-
 void collision(t_obstacle *list, t_obj *player)
 {
     t_obstacle *tmp = list;
@@ -26,14 +25,14 @@ void collision(t_obstacle *list, t_obj *player)
 void end(t_obstacle *list, t_obj *player, sfRenderWindow *window)
 {
     t_obstacle *tmp = list;
-    while(list != NULL) {
+    while (list != NULL) {
         sfFloatRect bounding_box = sfSprite_getGlobalBounds(player->sprite);
         sfFloatRect bounding_box2 = sfSprite_getGlobalBounds(list->sprite);
         bounding_box.width += -100;
         if (sfFloatRect_intersects(&bounding_box,
         &bounding_box2, NULL) && list->type == 2)
             sfRenderWindow_close(window);
-        list = list->next;    
+        list = list->next;
     }
     list = tmp;
 }

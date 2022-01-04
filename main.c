@@ -4,18 +4,7 @@
 ** File description:
 ** main
 */
-#include "framebuffer.h"
 #include "my.h"
-
-framebuffer_t *framebuffer_create(unsigned int width, unsigned int height)
-{
-    framebuffer_t *frame;
-    frame = malloc(sizeof(framebuffer_t) + 1);
-    frame -> width = width;
-    frame -> height = height;
-    frame -> pixels = malloc(width * height  * 4);
-    return frame;
-}
 
 int test(t_obstacle *list)
 {
@@ -31,11 +20,10 @@ sfRenderWindow *create_window(void)
 {
     sfRenderWindow *window;
     sfVideoMode mode = {1920, 1080, 32};
-    window = sfRenderWindow_create(mode, "My Runner", sfResize | sfClose, NULL);
+    window = sfRenderWindow_create(mode, "My Runner", sfResize|sfClose, NULL);
     sfWindow_setFramerateLimit(window, 60);
     return window;
 }
-
 
 int main(int ac, char **av)
 {
@@ -58,7 +46,7 @@ int main(int ac, char **av)
         draw_all_obstacle(window, list, par);
         move_all_obstacle(window, list, par);
         end(list, obj, window);
-        update_score(par, test); 
+        update_score(par, test);
         sfRenderWindow_drawText(window, test->text, NULL);
         sfRenderWindow_display(window);
     }
