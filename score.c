@@ -4,10 +4,8 @@
 ** File description:
 ** score
 */
- #include <string.h>
 #include "my.h"
-#include <stdio.h>
- #include <stdlib.h>
+
 void update_score(t_par *par, t_text *txt)
 {
     sfTime time;
