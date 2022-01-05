@@ -54,7 +54,7 @@ void move_helper(t_obj *obj)
 {
     if (obj->pos.y == 847)
     obj->rect.left += 233;
-    else 
+    else
         obj->rect.left = 0;
     if (obj->rect.left >= 1398)
         obj->rect.left = 0;
