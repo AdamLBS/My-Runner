@@ -89,7 +89,7 @@ t_obstacle *create_obstacle(char *path, int x)
     t_obstacle *obj = malloc(sizeof(t_obstacle));
     obj->texture = sfTexture_createFromFile(path, NULL);
     sfVector2f pos = {x, 885};
-    obj->rect.width = 190;
+    obj->rect.width = 180;
     obj->rect.height = 200;
     obj->rect.left = 0;
     obj->rect.top = 0;

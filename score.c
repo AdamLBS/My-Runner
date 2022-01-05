@@ -4,9 +4,10 @@
 ** File description:
 ** score
 */
-
+ #include <string.h>
 #include "my.h"
-
+#include <stdio.h>
+ #include <stdlib.h>
 void update_score(t_par *par, t_text *txt)
 {
     sfTime time;
@@ -25,6 +26,24 @@ void update_text(t_par *par, t_text *txt)
     char *nb = malloc(sizeof(char) * 1000000);
     my_itoa(par->score, nb);
     char test[100000] = "Score is ";
+    my_strcat(test, nb);
+    sfText_setString(txt->text, test);
+}
+
+void score_text_end(int score, t_text *txt)
+{
+    char *nb = malloc(sizeof(char) * 1000000);
+    my_itoa(score, nb);
+    char test[100000] = "Your score is ";
+    my_strcat(test, nb);
+    sfText_setString(txt->text, test);
+}
+
+void hs_text_end(int score, t_text *txt)
+{
+    char *nb = malloc(sizeof(char) * 1000000);
+    my_itoa(score, nb);
+    char test[100000] = "Your highscore is ";
     my_strcat(test, nb);
     sfText_setString(txt->text, test);
 }

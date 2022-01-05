@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-void collision(t_obstacle *list, t_obj *player)
+void collision(t_obstacle *list, t_obj *player, t_par *par)
 {
     t_obstacle *tmp = list;
     while (list != NULL) {
@@ -15,14 +15,16 @@ void collision(t_obstacle *list, t_obj *player)
         sfFloatRect bounding_box2 = sfSprite_getGlobalBounds(list->sprite);
         bounding_box.height += -100;
         if (sfFloatRect_intersects(&bounding_box,
-        &bounding_box2, NULL) && list->type == 1)
-            write(1, "Touched", 8);
+        &bounding_box2, NULL) && list->type == 1) {
+            par->game = 1;
+            par->loose = 1;
+        }
         list = list->next;
     }
     list = tmp;
 }
 
-void end(t_obstacle *list, t_obj *player, sfRenderWindow *window)
+void end(t_obstacle *list, t_obj *player, t_par *par)
 {
     t_obstacle *tmp = list;
     while (list != NULL) {
@@ -30,8 +32,10 @@ void end(t_obstacle *list, t_obj *player, sfRenderWindow *window)
         sfFloatRect bounding_box2 = sfSprite_getGlobalBounds(list->sprite);
         bounding_box.width += -100;
         if (sfFloatRect_intersects(&bounding_box,
-        &bounding_box2, NULL) && list->type == 2)
-            sfRenderWindow_close(window);
+        &bounding_box2, NULL) && list->type == 2){
+            par->game = 1;
+            par->win = 1;
+        }
         list = list->next;
     }
     list = tmp;

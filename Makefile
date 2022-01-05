@@ -22,6 +22,11 @@ SRC =	main.c \
 		my_revstr.c \
 		score.c \
 		my_strcat.c \
+		game.c \
+		highscore.c \
+		my_strlen.c \
+		my_get_nbr.c \
+		txt_pos.c \
 
 OBJ = $(SRC:.c=.o)
 

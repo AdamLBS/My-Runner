@@ -27,27 +27,13 @@ sfRenderWindow *create_window(void)
 
 int main(int ac, char **av)
 {
-    char *file = openfile(ac, av[1]);
-    t_obstacle *list = NULL;
-    sfClock *clock = sfClock_create();
-    sfRenderWindow *window = create_window();
-    t_par *par = create_all_bg(window);
-    t_obj *obj = create_player("sprite.png");
-    sfEvent event;
-    t_text *test = create_text("Score is 0", 50);
-    generate_obstacle(file, &list);
-    while (sfRenderWindow_isOpen(window)) {
-        collision(list, obj);
-        draw_all_bg(window, par);
-        move_player(obj, par->clock5);
-        gestion_event(obj, event, window);
-        update(obj, sfClock_restart(clock).microseconds/ 1000000.f);
-        sfRenderWindow_drawSprite(window, obj->sprite, NULL);
-        draw_all_obstacle(window, list, par);
-        move_all_obstacle(window, list, par);
-        end(list, obj, window);
-        update_score(par, test);
-        sfRenderWindow_drawText(window, test->text, NULL);
-        sfRenderWindow_display(window);
+    if (ac != 1) {
+        sfRenderWindow *window = create_window();
+        start_menu(ac, av, window);
+    }
+    if (ac == 1) {
+    my_putstr("./my_runner: bad arguments: 0 given but 1 is required\n");
+    my_putstr("retry with -h\n");
+    return 84;
     }
 }

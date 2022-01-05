@@ -37,7 +37,12 @@ struct all_parallax {
     sfClock *clock4;
     sfClock *clock5;
     sfClock *clock6;
+    sfClock *clock7;
+    int game;
+    int win;
+    int loose;
     int score;
+    int hs;
 }typedef t_par;
 
 struct object {
@@ -73,13 +78,19 @@ t_obstacle *create_obstacle(char *path, int x);
 void append_obstacle(char *path, t_obstacle **list, int pos);
 void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par);
 sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock);
-void collision(t_obstacle *list, t_obj *player);
+void collision(t_obstacle *list, t_obj *player, t_par *par);
 char *openfile(int ac, char *filepath);
 void generate_obstacle(char *map, t_obstacle **list);
 t_obstacle *create_portal(char *path, int x);
 void append_portal(char *path, t_obstacle **list, int pos);
-void end(t_obstacle *list, t_obj *player, sfRenderWindow *window);
+void end(t_obstacle *list, t_obj *player, t_par *par);
 t_text *create_text(char *text, int size);
 int get_intlen(int val);
 char *my_itoa(int val, char *buffer);
+t_obj *create_title(char *path);
+void won_menu(sfRenderWindow *window, t_par *par2);
+void get_score(int nb, t_text *txt);
+char *my_strcat (char *dest, char const *src);
+sfVector2f get_bounds_sprite(float x, float y, t_obj *obj);
+sfVector2f get_bounds_txt(float x, float y, t_text *txt);
 #endif /* !MY_H_ */

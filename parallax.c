@@ -55,7 +55,9 @@ t_par *create_all_bg(sfWindow *window)
     par->clock4 = sfClock_create();
     par->clock5 = sfClock_create();
     par->clock6 = sfClock_create();
+    par->clock7 = sfClock_create();
     par->score = 0;
+    par->game = 0;
     return par;
 }
 
@@ -65,6 +67,10 @@ void draw_all_bg(sfWindow *window, t_par *par)
     sfRenderWindow_drawSprite(window, par->bg3->sprite, NULL);
     sfRenderWindow_drawSprite(window, par->bg4->sprite, NULL);
     sfRenderWindow_drawSprite(window, par->bg2->sprite, NULL);
+}
+
+void move_all_bg(sfWindow *window, t_par *par)
+{
     move_parallax(par->bg3, 1, par->clock3);
     move_parallax(par->bg4, 2, par->clock4);
     move_parallax(par->bg2, 3, par->clock2);
