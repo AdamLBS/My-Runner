@@ -7,10 +7,10 @@
 
 #include "my.h"
 
-char *openfile(int ac, char *filepath)
+char *openfile(char *filepath)
 {
     int fd = open(filepath, O_RDONLY);
-    int bytes = 10000;
+    int bytes = 500;
     char *file = malloc(sizeof(char) * bytes + 1);
     read(fd, file, bytes);
     close(fd);

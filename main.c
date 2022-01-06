@@ -25,11 +25,22 @@ sfRenderWindow *create_window(void)
     return window;
 }
 
+t_utils *get_par(int ac, char **av)
+{
+    if (ac == 2) {
+        t_utils *par = malloc(sizeof(t_utils));
+        par->path = av[1];
+        return par;
+    } else
+        my_putstr("Generation auto TODO");
+}
+
 int main(int ac, char **av)
 {
+    t_utils *par = get_par(ac, av);
     if (ac != 1) {
         sfRenderWindow *window = create_window();
-        start_menu(ac, av, window);
+        start_menu(par, window);
     }
     if (ac == 1) {
     my_putstr("./my_runner: bad arguments: 0 given but 1 is required\n");

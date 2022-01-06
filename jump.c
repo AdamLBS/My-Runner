@@ -25,19 +25,23 @@ void update (t_obj *obj, double elapsed)
     sfSprite_setPosition(obj->sprite, obj->pos);
 }
 
-void gestion_event(t_obj *obj, sfEvent event, sfRenderWindow *window)
+void gestion_event(t_obj *obj, sfEvent event, sfRenderWindow *window, t_par *par)
 {
     while (sfRenderWindow_pollEvent(window, &event)) {
         if (event.key.code == (sfKeySpace)){
             manage_space(obj);
         }
-        if (event.type = sfEvtClosed)
+        if (event.type == sfEvtClosed) {
+            destroy_sounds(par, obj);
             sfRenderWindow_close(window);
+        }
     }
 }
 
 void manage_space(t_obj *obj)
 {
-    if (obj->pos.y == 847)
+    if (obj->pos.y == 847) {
+        sfSound_play(obj->jump_sound->sound);
         obj->velocity.y += -720;
+    }
 }

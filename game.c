@@ -7,12 +7,14 @@
 
 #include "my.h"
 
-void game(int ac, char **av, sfRenderWindow *window)
+void game(t_utils *val, sfRenderWindow *window)
 {
-    char *file = openfile(ac, av[1]);
+    char *file = openfile(val->path);
+    t_obj *obj = create_player("sprite.png");
     t_obstacle *list = NULL;
     t_par *par = create_all_bg(window);
-    t_obj *obj = create_player("sprite.png");
+    par->music = create_music("music.ogg", 1);
+    sfMusic_play(par->music->music);
     sfEvent event;
     t_text *test = create_text("Score i", 50);
     generate_obstacle(file, &list);
@@ -21,7 +23,7 @@ void game(int ac, char **av, sfRenderWindow *window)
         draw_all_bg(window, par);
         move_all_bg(window, par);
         move_player(obj, par->clock5);
-        gestion_event(obj, event, window);
+        gestion_event(obj, event, window, par);
         update(obj, sfClock_restart(par->clock7).microseconds/ 1000000.f);
         sfRenderWindow_drawSprite(window, obj->sprite, NULL);
         draw_all_obstacle(window, list, par);
@@ -32,15 +34,18 @@ void game(int ac, char **av, sfRenderWindow *window)
         sfRenderWindow_display(window);
     }
     if (par->win == 1) {
-        write(1, "Win", 4);
-        write_score(par->score);
-        won_menu(window, par);
+        destroy_sounds(par, obj);
+        destroy_obstacles(list);
+        won_menu(val, window, par);
     }
-    if (par->loose == 1)
-        write(1, "Loose", 6);
+    if (par->loose == 1) {
+        destroy_sounds(par, obj);
+        destroy_obstacles(list);
+        game_over(val, window, par);
+    }
 }
 
-void start_menu(int ac, char **av, sfRenderWindow *window)
+void start_menu(t_utils *val, sfRenderWindow *window)
 {
     t_par *par = create_all_bg(window);
     t_obj *test = create_title("title_menu.png");
@@ -53,7 +58,7 @@ void start_menu(int ac, char **av, sfRenderWindow *window)
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
             if (event.key.code == (sfKeyS))
-                game(ac, av, window);
+                game(val, window);
         }
         draw_all_bg(window, par);
         move_all_bg(window, par);
@@ -64,35 +69,26 @@ void start_menu(int ac, char **av, sfRenderWindow *window)
     }
 }
 
-void won_menu(sfRenderWindow *window, t_par *par2)
+void won_menu(t_utils *info, sfRenderWindow *window, t_par *par2)
 {
+    write_score(par2->score);
     t_par *par = create_all_bg(window);
     par->hs = get_highscore();
     t_obj *test = create_title("won_title.png");
-    t_text *txt_test = create_text("Your score is ", 40);
-    t_text *hs_text = create_text("Your highscore is ", 40);
+    t_win_txt *all_txt = create_all_txt();
     sfEvent event;
     sfVector2f test2 = {1920/2.0f, 1080/2.0f};
     sfVector2f test3 = get_bounds_sprite(2.0f, 0.5f, test);
-    sfVector2f test4 = get_bounds_txt(2.0f, 1.0f, txt_test);
-    sfVector2f test5 = get_bounds_txt(2.0f, -2.5f, hs_text);
-    score_text_end(par2->score, txt_test);
-    hs_text_end(par->hs, hs_text);
-        sfSprite_setPosition(test->sprite, test2);
-        sfSprite_setOrigin(test->sprite, test3);
+    score_text_end(par2->score, all_txt->txt_test);
+    hs_text_end(par->hs, all_txt->hs_text);
+    sfSprite_setPosition(test->sprite, test2);
+    sfSprite_setOrigin(test->sprite, test3);
     while (sfRenderWindow_isOpen(window)) {
-        while (sfRenderWindow_pollEvent(window, &event)) {
-            if (event.type == sfEvtClosed)
-                sfRenderWindow_close(window);
-        }
+        manage_event_win(window, event, info);
         draw_all_bg(window, par);
-        sfText_setPosition(txt_test->text, test2 );
-        sfText_setOrigin(txt_test->text, test4);
-        sfText_setPosition(hs_text->text, test2 );
-        sfText_setOrigin(hs_text->text, test5);
+        set_position(all_txt);
+        draw_txt(window, all_txt);
         sfRenderWindow_drawSprite(window, test->sprite, NULL);
-        sfRenderWindow_drawText(window, txt_test->text, NULL);
-        sfRenderWindow_drawText(window, hs_text->text, NULL);
         sfRenderWindow_display(window);
     }
 }

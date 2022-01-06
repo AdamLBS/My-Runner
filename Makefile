@@ -27,6 +27,10 @@ SRC =	main.c \
 		my_strlen.c \
 		my_get_nbr.c \
 		txt_pos.c \
+		sound.c \
+		destroyer.c \
+		win_utils.c \
+		game_over.c \
 
 OBJ = $(SRC:.c=.o)
 

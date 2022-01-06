@@ -33,6 +33,7 @@ t_obj *create_player(char *path)
     obj->clock = sfClock_create();
     obj->pos = pos;
     obj->weight = 200;
+    obj->jump_sound = create_sound("jump.ogg");
     return obj;
 }
 

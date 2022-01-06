@@ -16,6 +16,8 @@ char write_score(int score)
     int high_score = my_get_nbr(buffer);
     if (score > high_score){
     my_itoa(score, buffer2);
+    buffer2[my_strlen(buffer2)] = '\n';
+    (buffer2);
     int fd2 = open("score.txt", O_WRONLY | O_CREAT | O_TRUNC);
     write(fd2, buffer2, my_strlen(buffer2));
     return buffer2;
@@ -24,10 +26,10 @@ char write_score(int score)
 
 int get_highscore(void)
 {
-    char buffer[100];
-    char buffer2[100];
+    char buffer[20];
+    char buffer2[20];
     int fd = open("score.txt", O_RDONLY);
-    read(fd, buffer, 100);
+    read(fd, buffer, 20);
     int high_score = my_get_nbr(buffer);
     return high_score;
 }

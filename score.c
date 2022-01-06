@@ -21,27 +21,29 @@ void update_score(t_par *par, t_text *txt)
 
 void update_text(t_par *par, t_text *txt)
 {
-    char *nb = malloc(sizeof(char) * 1000000);
+    char *nb = malloc(sizeof(char) * 100);
     my_itoa(par->score, nb);
-    char test[100000] = "Score is ";
+    char test[100] = "Score is ";
     my_strcat(test, nb);
     sfText_setString(txt->text, test);
+    free(nb);
 }
 
 void score_text_end(int score, t_text *txt)
 {
-    char *nb = malloc(sizeof(char) * 1000000);
+    char *nb = malloc(sizeof(char) * 100);
     my_itoa(score, nb);
-    char test[100000] = "Your score is ";
+    char test[100] = "Your score is ";
     my_strcat(test, nb);
     sfText_setString(txt->text, test);
 }
 
 void hs_text_end(int score, t_text *txt)
 {
-    char *nb = malloc(sizeof(char) * 1000000);
+    char *nb = malloc(sizeof(char) * 100);
     my_itoa(score, nb);
-    char test[100000] = "Your highscore is ";
+    char test[100] = "Your highscore is ";
     my_strcat(test, nb);
     sfText_setString(txt->text, test);
+    free(nb);
 }

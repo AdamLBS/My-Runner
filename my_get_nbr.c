@@ -9,7 +9,7 @@ int my_get_nbr(char *str)
 {
     int i = 0;
     int nb = 0;
-    while (str[i] != '\0' ) {
+    while (str[i] != '\n' ) {
         while (str[i] >= '0' && str[i] <= '9') {
             nb = nb * 10;
             nb = nb + str[i] - 48;
