@@ -31,11 +31,15 @@ SRC =	main.c \
 		destroyer.c \
 		win_utils.c \
 		game_over.c \
+		infinite.c \
+		create_texture.c \
+		loop.c \
+		utils.c \
 
 OBJ = $(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
-	gcc -o $(NAME) $(OBJ) -lcsfml-window -lcsfml-system -lcsfml-graphics -lcsfml-audio -g3
+	gcc -o $(NAME) $(OBJ) -lcsfml-window -lcsfml-system -lcsfml-graphics -lcsfml-audio
 
 all : 	$(NAME)
 

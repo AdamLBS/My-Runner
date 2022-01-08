@@ -9,44 +9,30 @@
 
 void game(t_utils *val, sfRenderWindow *window)
 {
-    char *file = openfile(val->path);
-    t_obj *obj = create_player("sprite.png");
-    t_obstacle *list = NULL;
+    t_obj *obj = create_player("sprite.png", val->player);
+    t_obstacle *list = NULL, *tail = NULL;
     t_par *par = create_all_bg(window);
-    par->music = create_music("music.ogg", 1);
-    sfMusic_play(par->music->music);
     sfEvent event;
-    t_text *test = create_text("Score i", 50);
-    generate_obstacle(file, &list);
+    t_text *test = create_text("Score is", 50);
+    create_clock(par);
+    sfMusic_play(par->music->music);
+    generate_obstacle(&tail, val->map, &list, val);
     while (sfRenderWindow_isOpen(window) && par->game != 1) {
-        collision(list, obj, par);
-        draw_all_bg(window, par);
-        move_all_bg(window, par);
-        move_player(obj, par->clock5);
-        gestion_event(obj, event, window, par);
-        update(obj, sfClock_restart(par->clock7).microseconds/ 1000000.f);
-        sfRenderWindow_drawSprite(window, obj->sprite, NULL);
-        draw_all_obstacle(window, list, par);
-        move_all_obstacle(window, list, par);
-        end(list, obj, par);
-        update_score(par, test);
+        draw_everything(window, list, par, obj);
+        utils(window, list, par, obj);
         sfRenderWindow_drawText(window, test->text, NULL);
+        move_player(obj, par->clock5);
+        update_score(par, test);
+        gestion_event(obj, event, window, par);
         sfRenderWindow_display(window);
     }
-    if (par->win == 1) {
-        destroy_sounds(par, obj);
-        destroy_obstacles(list);
-        won_menu(val, window, par);
-    }
-    if (par->loose == 1) {
-        destroy_sounds(par, obj);
-        destroy_obstacles(list);
-        game_over(val, window, par);
-    }
+    destroy_sounds(par, obj);
+    manage_end(par, window, val, list);
 }
 
 void start_menu(t_utils *val, sfRenderWindow *window)
 {
+    sfRenderWindow_setFramerateLimit(window, 60);
     t_par *par = create_all_bg(window);
     t_obj *test = create_title("title_menu.png");
     sfEvent event;
@@ -57,16 +43,18 @@ void start_menu(t_utils *val, sfRenderWindow *window)
         while (sfRenderWindow_pollEvent(window, &event)) {
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
-            if (event.key.code == (sfKeyS))
+            if (event.key.code == (sfKeyS)) {
+                sfRenderWindow_clear(window, sfBlack);
                 game(val, window);
+            }
         }
         draw_all_bg(window, par);
-        move_all_bg(window, par);
         sfSprite_setPosition(test->sprite, test2);
         sfSprite_setOrigin(test->sprite, test3);
         sfRenderWindow_drawSprite(window, test->sprite, NULL);
         sfRenderWindow_display(window);
     }
+    return;
 }
 
 void won_menu(t_utils *info, sfRenderWindow *window, t_par *par2)
@@ -91,4 +79,5 @@ void won_menu(t_utils *info, sfRenderWindow *window, t_par *par2)
         sfRenderWindow_drawSprite(window, test->sprite, NULL);
         sfRenderWindow_display(window);
     }
+    return;
 }

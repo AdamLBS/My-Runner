@@ -25,18 +25,26 @@ void update (t_obj *obj, double elapsed)
     sfSprite_setPosition(obj->sprite, obj->pos);
 }
 
-void gestion_event(t_obj *obj, sfEvent event, sfRenderWindow *window, t_par *par)
-{
-    while (sfRenderWindow_pollEvent(window, &event)) {
-        if (event.key.code == (sfKeySpace)){
-            manage_space(obj);
-        }
-        if (event.type == sfEvtClosed) {
-            destroy_sounds(par, obj);
-            sfRenderWindow_close(window);
-        }
-    }
+void handle_down(t_obj *obj) {
+        obj->velocity.y = 720;
 }
+
+void gestion_event(t_obj *obj, sfEvent event, sfRenderWindow *window,
+t_par *par)
+{
+    sfVector2f pos = sfSprite_getPosition(obj->sprite);
+    sfWindow_setKeyRepeatEnabled(window, sfFalse);
+    while (sfRenderWindow_pollEvent(window, &event)) {
+        if (event.type == sfEvtKeyPressed) {
+            if (event.key.code == (sfKeySpace) && pos.y == 847)
+                manage_space(obj);
+            }
+        if (event.key.code == (sfKeyDown))
+            handle_down(obj);
+        if (event.type == sfEvtClosed)
+            sfRenderWindow_close(window);
+    }
+    }
 
 void manage_space(t_obj *obj)
 {

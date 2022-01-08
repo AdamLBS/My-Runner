@@ -20,6 +20,13 @@
 
 struct utils {
     char *path;
+    int ac;
+    char **av;
+    sfTexture *player;
+    sfTexture *portal;
+    sfTexture *tree_s;
+    sfTexture *tree_d;
+    char *map;
 } typedef t_utils;
 
 struct sound {
@@ -38,6 +45,7 @@ struct parallax {
     sfSprite *sprite;
     sfIntRect rect;
     sfVector2f scale;
+    float speed;
 } typedef t_bg;
 
 struct all_parallax {
@@ -58,6 +66,7 @@ struct all_parallax {
     int score;
     int hs;
     t_music *music;
+    float speed;
 }typedef t_par;
 
 struct object {
@@ -101,17 +110,16 @@ struct win_txt {
 
 struct parallax *create_bg (char *path);
 sfSprite *create_sprite(t_bg *obj);
-t_par *create_all_bg(sfWindow *window);
-t_obj *create_player(char *path);
-t_obstacle *create_obstacle(char *path, int x);
-void append_obstacle(char *path, t_obstacle **list, int pos);
-void draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par);
-sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock);
+t_par *create_all_bg(sfRenderWindow *window);
+t_obj *create_player(char *path, sfTexture *texture);
+void append_obstacle(t_obstacle **tail, t_obstacle **list,
+int pos, sfTexture *text);
+t_obstacle *create_obstacle(char *path, int x, sfTexture *text);
+int draw_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par);
 void collision(t_obstacle *list, t_obj *player, t_par *par);
 char *openfile(char *filepath);
-void generate_obstacle(char *map, t_obstacle **list);
-t_obstacle *create_portal(char *path, int x);
-void append_portal(char *path, t_obstacle **list, int pos);
+t_obstacle *create_portal(char *path, int x, sfTexture *text);
+void append_portal(char *path, t_obstacle **list, int pos, sfTexture *text);
 void end(t_obstacle *list, t_obj *player, t_par *par);
 t_text *create_text(char *text, int size);
 int get_intlen(int val);
@@ -126,9 +134,21 @@ int get_highscore(void);
 char write_score(int score);
 int my_get_nbr(char *str);
 t_sound *create_sound(char *path);
+void delete_obstacle(char *path, t_obstacle **list);
 t_music *create_music(char *path, int loop);
 t_win_txt *create_all_txt(void);
 void game(t_utils *val, sfRenderWindow *window);
 void start_menu(t_utils *val, sfRenderWindow *window);
 t_utils *get_par(int ac, char **av);
+char *generate_infinitemap(void);
+void move_helper(t_obj *obj);
+sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock,
+t_par *par);
+void generate_obstacle(t_obstacle **tail, char *map, t_obstacle **list,
+t_utils *val);
+void manage_end(t_par *par, sfRenderWindow *window, t_utils *val,
+t_obstacle *list);
+void draw_everything(sfWindow *window, t_obstacle *list, t_par *par,
+t_obj *obj);
+void utils(sfWindow *window, t_obstacle *list, t_par *par, t_obj *obj);
 #endif /* !MY_H_ */

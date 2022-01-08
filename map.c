@@ -10,7 +10,7 @@
 char *openfile(char *filepath)
 {
     int fd = open(filepath, O_RDONLY);
-    int bytes = 500;
+    int bytes = 5000;
     char *file = malloc(sizeof(char) * bytes + 1);
     read(fd, file, bytes);
     close(fd);

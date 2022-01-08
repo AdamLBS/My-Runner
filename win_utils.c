@@ -7,15 +7,18 @@
 
 #include "my.h"
 
-void manage_event_win(sfRenderWindow *window, sfEvent event, t_utils *val)
+void manage_event_win(sfRenderWindow *window, sfEvent event,
+t_utils *val)
 {
     while (sfRenderWindow_pollEvent(window, &event)) {
         if (event.type == sfEvtClosed)
             sfRenderWindow_close(window);
         if (event.key.code == (sfKeyEscape))
             sfRenderWindow_close(window);
-        if (event.key.code == (sfKeyR))
+        if (event.key.code == (sfKeyR)) {
+            val = get_par(val->ac, val->av);
             game(val, window);
+        }
     }
 }
 

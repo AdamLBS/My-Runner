@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-t_obstacle *create_portal(char *path, int x)
+t_obstacle *create_portal(char *path, int x, sfTexture *text)
 {
     sfIntRect rect;
     sfVector2f pos = {x, 750};
@@ -16,7 +16,7 @@ t_obstacle *create_portal(char *path, int x)
     rect.left = 299;
     rect.top = 0;
     t_obstacle *obj = malloc(sizeof(t_obstacle));
-    obj->texture = sfTexture_createFromFile(path, NULL);
+    obj->texture = text;
     obj->rect = rect;
     obj->sprite = sfSprite_create();
     sfSprite_setTexture(obj->sprite, obj->texture, sfFalse);

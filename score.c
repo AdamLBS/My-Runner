@@ -15,7 +15,6 @@ void update_score(t_par *par, t_text *txt)
     if (seconds > 0.1) {
         par->score += 1;
         update_text(par, txt);
-    sfClock_restart(par->clock6);
     }
 }
 

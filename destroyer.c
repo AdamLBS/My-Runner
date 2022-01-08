@@ -15,11 +15,10 @@ void destroy_sounds(t_par *par, t_obj *obj)
     sfSoundBuffer_destroy(obj->jump_sound->soundbuffer);
 }
 
-void destroy_obstacles(t_obstacle *list)
+void destroy_obstacles(t_obstacle **list)
 {
-    while (list != NULL) {
-        sfSprite_destroy(list->sprite);
-        list = list->next;
+    while ((*list) != NULL) {
+        sfSprite_destroy((*list)->sprite);
+        (*list) = (*list)->next;
     }
-    list = NULL;
 }

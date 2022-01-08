@@ -15,7 +15,7 @@ t_obj *create_title(char *path)
     return obj;
 }
 
-t_obj *create_player(char *path)
+t_obj *create_player(char *path, sfTexture *texture)
 {
     sfIntRect rect;
     sfVector2f pos = {0, 847};
@@ -24,13 +24,13 @@ t_obj *create_player(char *path)
     rect.left = 0;
     rect.top = 0;
     t_obj *obj = malloc(sizeof(t_obj));
-    obj->texture = sfTexture_createFromFile(path, NULL);
+    sfTexture_createFromFile(path, NULL);
+    obj->texture = texture;
     obj->rect = rect;
     obj->sprite = sfSprite_create();
-    sfSprite_setTexture(obj->sprite, obj->texture, sfFalse);
+    sfSprite_setTexture(obj->sprite, obj->texture, sfTrue);
     sfSprite_setTextureRect(obj->sprite, obj->rect);
     sfSprite_setPosition(obj->sprite, pos);
-    obj->clock = sfClock_create();
     obj->pos = pos;
     obj->weight = 200;
     obj->jump_sound = create_sound("jump.ogg");

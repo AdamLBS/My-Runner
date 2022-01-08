@@ -21,7 +21,7 @@ sfRenderWindow *create_window(void)
     sfRenderWindow *window;
     sfVideoMode mode = {1920, 1080, 32};
     window = sfRenderWindow_create(mode, "My Runner", sfResize|sfClose, NULL);
-    sfWindow_setFramerateLimit(window, 60);
+    sfRenderWindow_setFramerateLimit(window, 60);
     return window;
 }
 
@@ -29,10 +29,17 @@ t_utils *get_par(int ac, char **av)
 {
     if (ac == 2) {
         t_utils *par = malloc(sizeof(t_utils));
-        par->path = av[1];
+        create_textures(par);
+        char *test = generate_infinitemap();
+        par->path = test;
+        par->ac = ac;
+        par->av = av;
+        par->map = test;
         return par;
-    } else
-        my_putstr("Generation auto TODO");
+    } else {
+        char *test = generate_infinitemap();
+        my_putstr(test);
+    }
 }
 
 int main(int ac, char **av)
