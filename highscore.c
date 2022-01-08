@@ -15,12 +15,12 @@ char write_score(int score)
     read(fd, buffer, 100);
     int high_score = my_get_nbr(buffer);
     if (score > high_score){
-    my_itoa(score, buffer2);
-    buffer2[my_strlen(buffer2)] = '\n';
-    (buffer2);
-    int fd2 = open("score.txt", O_WRONLY | O_CREAT | O_TRUNC);
-    write(fd2, buffer2, my_strlen(buffer2));
-    return buffer2;
+        my_itoa(score, buffer2);
+        buffer2[get_intlen(score)] = '\n';
+        buffer2[get_intlen(score) + 1] = '\0';
+        int fd2 = open("score.txt", O_WRONLY | O_CREAT | O_TRUNC);
+        write(fd2, buffer2, my_strlen(buffer2));
+        return buffer2;
     }
 }
 
@@ -32,4 +32,14 @@ int get_highscore(void)
     read(fd, buffer, 20);
     int high_score = my_get_nbr(buffer);
     return high_score;
+}
+
+void reset_score(void)
+{
+    char buffer2[100];
+    my_itoa(0, buffer2);
+    buffer2[my_strlen(buffer2)] = '\n';
+    int fd2 = open("score.txt", O_WRONLY | O_CREAT | O_TRUNC);
+    write(fd2, buffer2, my_strlen(buffer2));
+    my_putstr("The highscore is now set to 0.\n");
 }

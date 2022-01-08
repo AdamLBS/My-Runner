@@ -19,8 +19,6 @@ char *generate_infinitemap(void)
         map[i] = obstacle + '0';
         i++;
     }
-    map[size] = '3';
-    size++;
     map[size] = '\0';
     my_putstr(map);
     return map;

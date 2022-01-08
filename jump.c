@@ -41,8 +41,9 @@ t_par *par)
             }
         if (event.key.code == (sfKeyDown))
             handle_down(obj);
-        if (event.type == sfEvtClosed)
+        if (event.type == sfEvtClosed){
             sfRenderWindow_close(window);
+        }
     }
     }
 

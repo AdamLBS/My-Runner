@@ -12,6 +12,7 @@ void game(t_utils *val, sfRenderWindow *window)
     t_obj *obj = create_player("sprite.png", val->player);
     t_obstacle *list = NULL, *tail = NULL;
     t_par *par = create_all_bg(window);
+    par->music = create_music("music.ogg", 1);
     sfEvent event;
     t_text *test = create_text("Score is", 50);
     create_clock(par);

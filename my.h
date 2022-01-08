@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include "stdlib.h"
 #include <unistd.h>
+#include<stdio.h>
 #ifndef MY_H_
     #define MY_H_
 
@@ -142,6 +143,7 @@ void start_menu(t_utils *val, sfRenderWindow *window);
 t_utils *get_par(int ac, char **av);
 char *generate_infinitemap(void);
 void move_helper(t_obj *obj);
+void handle_input(t_utils *par);
 sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock,
 t_par *par);
 void generate_obstacle(t_obstacle **tail, char *map, t_obstacle **list,
@@ -151,4 +153,7 @@ t_obstacle *list);
 void draw_everything(sfWindow *window, t_obstacle *list, t_par *par,
 t_obj *obj);
 void utils(sfWindow *window, t_obstacle *list, t_par *par, t_obj *obj);
+void destroy_sounds(t_par *par, t_obj *obj);
+int handle_game(int ac, char **av);
+sfRenderWindow *create_window(void);
 #endif /* !MY_H_ */

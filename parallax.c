@@ -61,7 +61,6 @@ t_par *create_all_bg(sfRenderWindow *window)
     par->bg4 = bg4;
     par->score = 0;
     par->game = 0;
-    par->music = create_music("music.ogg", 1);
     return par;
 }
 

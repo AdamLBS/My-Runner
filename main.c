@@ -6,16 +6,6 @@
 */
 #include "my.h"
 
-int test(t_obstacle *list)
-{
-    int i = 4;
-    int pos = 3000;
-    while (i != 0) {
-        pos += 1000;
-        i--;
-    }
-}
-
 sfRenderWindow *create_window(void)
 {
     sfRenderWindow *window;
@@ -30,11 +20,9 @@ t_utils *get_par(int ac, char **av)
     if (ac == 2) {
         t_utils *par = malloc(sizeof(t_utils));
         create_textures(par);
-        char *test = generate_infinitemap();
-        par->path = test;
         par->ac = ac;
         par->av = av;
-        par->map = test;
+        handle_input(par);
         return par;
     } else {
         char *test = generate_infinitemap();
@@ -44,10 +32,8 @@ t_utils *get_par(int ac, char **av)
 
 int main(int ac, char **av)
 {
-    t_utils *par = get_par(ac, av);
     if (ac != 1) {
-        sfRenderWindow *window = create_window();
-        start_menu(par, window);
+        handle_options(ac, av);
     }
     if (ac == 1) {
     my_putstr("./my_runner: bad arguments: 0 given but 1 is required\n");
