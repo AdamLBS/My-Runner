@@ -46,6 +46,7 @@ void create_clock(t_par *par)
     par->clock6 = sfClock_create();
     par->clock7 = sfClock_create();
     par->clock1 = sfClock_create();
+    sfMusic_play(par->music->music);
 }
 
 t_par *create_all_bg(sfRenderWindow *window)

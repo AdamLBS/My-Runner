@@ -28,6 +28,9 @@ struct utils {
     sfTexture *tree_s;
     sfTexture *tree_d;
     char *map;
+    int done;
+    int pause;
+    int score;
 } typedef t_utils;
 
 struct sound {
@@ -146,6 +149,7 @@ void move_helper(t_obj *obj);
 void handle_input(t_utils *par);
 sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock,
 t_par *par);
+void move_all_obstacle(sfRenderWindow *window, t_obstacle *list, t_par *par);
 void generate_obstacle(t_obstacle **tail, char *map, t_obstacle **list,
 t_utils *val);
 void manage_end(t_par *par, sfRenderWindow *window, t_utils *val,
@@ -156,4 +160,14 @@ void utils(sfWindow *window, t_obstacle *list, t_par *par, t_obj *obj);
 void destroy_sounds(t_par *par, t_obj *obj);
 int handle_game(int ac, char **av);
 sfRenderWindow *create_window(void);
+int gestion_event(t_obj *obj, sfEvent event, sfRenderWindow *window,
+t_par *par);
+void manage_pause(t_utils *val, sfWindow *window, t_obstacle *list,
+t_obstacle *tail);
+void pause_menu(t_utils *val, sfWindow *window, t_obstacle *list,
+t_obstacle *tail);
+int gestion_event_pause(sfEvent event, sfRenderWindow *window);
+int utils_eventpause(sfEvent event, sfRenderWindow *window);
+t_win_txt *pause_all_txt(t_par *par);
+void draw_txt(sfRenderWindow *window, t_win_txt *all_txt, t_par *par);
 #endif /* !MY_H_ */

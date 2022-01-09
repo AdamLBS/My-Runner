@@ -14,7 +14,7 @@ char write_score(int score)
     int fd = open("score.txt", O_RDONLY);
     read(fd, buffer, 100);
     int high_score = my_get_nbr(buffer);
-    if (score > high_score){
+    if (score > high_score) {
         my_itoa(score, buffer2);
         buffer2[get_intlen(score)] = '\n';
         buffer2[get_intlen(score) + 1] = '\0';

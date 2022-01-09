@@ -27,6 +27,7 @@ t_utils *val)
             x += 1000;
         }
     }
+    val->done = 1;
     return;
 }
 
@@ -129,7 +130,7 @@ sfVector2f move_obstacle(t_obstacle *bg, int speed, sfClock *clock, t_par *par)
 {
     sfTime time;
     float temp = 10 + par->speed;
-    float multiply = 0.000010;
+    float multiply = 0.000001;
     float seconds;
     time = sfClock_getElapsedTime(clock);
     seconds = time.microseconds / 1000000.0;

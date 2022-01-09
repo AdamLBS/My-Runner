@@ -57,8 +57,9 @@ void set_position(t_win_txt *infos)
     sfText_setOrigin(infos->exit_text->text, infos->test7);
 }
 
-void draw_txt(sfRenderWindow *window, t_win_txt *all_txt)
+void draw_txt(sfRenderWindow *window, t_win_txt *all_txt, t_par *par)
 {
+    hs_text_end(par->hs, all_txt->hs_text);
     sfRenderWindow_drawText(window, all_txt->txt_test->text, NULL);
     sfRenderWindow_drawText(window, all_txt->hs_text->text, NULL);
     sfRenderWindow_drawText(window, all_txt->replay_text->text, NULL);

@@ -30,7 +30,7 @@ void handle_options(int ac, char **av)
         generate_random();
         return 0;
     }
-    if (av[1][0] == '-') {
+    if (av[1][0] == '-' && av[1][1] != 'i') {
         my_putstr("Invalid option\n");
         return 84;
     }
@@ -41,16 +41,18 @@ int handle_game(int ac, char **av)
 {
     FILE *file;
     int exists;
-    if ((file = fopen(av[1], "r"))) {
+    if ((file = fopen(av[1], "r")) && av[1][1] != 'i') {
         fclose(file);
         exists = 1;
     } else
         exists = 0;
-    if (exists != 1) {
+    if (exists != 1 && av[1][1] != 'i') {
         my_putstr("File doesn't exist\n");
         return 84;
     }
     t_utils *par = get_par(ac, av);
+    if (av[1][1] == 'i')
+    par->map = generate_infinitemap();
     sfRenderWindow *window = create_window();
     start_menu(par, window);
     return 0;

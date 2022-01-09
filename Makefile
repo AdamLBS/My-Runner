@@ -37,6 +37,8 @@ SRC =	main.c \
 		utils.c \
 		utils2.c \
 		events.c \
+		pause.c \
+		jump_utils.c \
 
 OBJ = $(SRC:.c=.o)
 

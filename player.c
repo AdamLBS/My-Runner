@@ -48,7 +48,6 @@ void move_player(t_obj *obj, sfClock *clock)
     sfClock_restart(clock);
     }
     sfSprite_setTextureRect(obj->sprite, obj->rect);
-
 }
 
 void move_helper(t_obj *obj)

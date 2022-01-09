@@ -9,6 +9,7 @@
 
 void game(t_utils *val, sfRenderWindow *window)
 {
+    int pause = 0;
     t_obj *obj = create_player("sprite.png", val->player);
     t_obstacle *list = NULL, *tail = NULL;
     t_par *par = create_all_bg(window);
@@ -16,19 +17,19 @@ void game(t_utils *val, sfRenderWindow *window)
     sfEvent event;
     t_text *test = create_text("Score is", 50);
     create_clock(par);
-    sfMusic_play(par->music->music);
     generate_obstacle(&tail, val->map, &list, val);
-    while (sfRenderWindow_isOpen(window) && par->game != 1) {
+    while (sfRenderWindow_isOpen(window) && par->game != 1 && pause == 0) {
         draw_everything(window, list, par, obj);
         utils(window, list, par, obj);
-        sfRenderWindow_drawText(window, test->text, NULL);
         move_player(obj, par->clock5);
-        update_score(par, test);
-        gestion_event(obj, event, window, par);
+        update_score(par, test, window);
+        pause = gestion_event(obj, event, window, par);
         sfRenderWindow_display(window);
     }
-    destroy_sounds(par, obj);
+    manage_val(val, pause, par, obj);
     manage_end(par, window, val, list);
+    free(par);
+    manage_pause(val, window, list, tail);
 }
 
 void start_menu(t_utils *val, sfRenderWindow *window)
@@ -63,14 +64,13 @@ void won_menu(t_utils *info, sfRenderWindow *window, t_par *par2)
     sfVector2f test2 = {1920/2.0f, 1080/2.0f};
     sfVector2f test3 = get_bounds_sprite(2.0f, 0.5f, test);
     score_text_end(par2->score, all_txt->txt_test);
-    hs_text_end(par->hs, all_txt->hs_text);
     sfSprite_setPosition(test->sprite, test2);
     sfSprite_setOrigin(test->sprite, test3);
     while (sfRenderWindow_isOpen(window)) {
         manage_event_win(window, event, info);
         draw_all_bg(window, par);
         set_position(all_txt);
-        draw_txt(window, all_txt);
+        draw_txt(window, all_txt, par);
         sfRenderWindow_drawSprite(window, test->sprite, NULL);
         sfRenderWindow_display(window);
     }

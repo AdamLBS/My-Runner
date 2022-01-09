@@ -6,7 +6,7 @@
 */
 #include "my.h"
 
-void update_score(t_par *par, t_text *txt)
+void update_score(t_par *par, t_text *txt, sfRenderWindow *window)
 {
     sfTime time;
     float seconds;
@@ -16,6 +16,7 @@ void update_score(t_par *par, t_text *txt)
         par->score += 1;
         update_text(par, txt);
     }
+    sfRenderWindow_drawText(window, txt->text, NULL);
 }
 
 void update_text(t_par *par, t_text *txt)
