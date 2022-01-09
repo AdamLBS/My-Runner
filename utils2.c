@@ -68,6 +68,7 @@ void print_help(void)
     my_putstr("Press ESC to leave the game. \n");
     my_putstr("Press P to pause the game.\n");
     my_putstr("Press S to start the game. \n");
+    my_putstr("Press R to resume the game. \n");
     my_putstr("Press Escape to jump.\n");
     my_putstr("Press Arrow-Down to quickly go back on the ground.\n\n");
     my_putstr("Available commands are : \n");
