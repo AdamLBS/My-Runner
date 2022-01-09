@@ -40,7 +40,6 @@ char *generate_random(void)
     srand(time(NULL));
     int size = rand() % 300;
     int tmp = 0;
-    printf("%d", size);
     char *map = malloc(sizeof(char) * size + 1);
     for (int i = 0 ; tmp != size; tmp++) {
         int obstacle = rand() % 3;

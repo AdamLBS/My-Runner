@@ -1,0 +1,10 @@
+The map is only on one lign with theses items :
+
+1 = A single tree.
+2 = Two trees next to eachother.
+3 = End portal.
+
+So a valid map would be for example :
+1112212123
+
+If you ever need to check a map just use ./my_runner -R to generate a random one.

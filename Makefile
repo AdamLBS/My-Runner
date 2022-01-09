@@ -43,7 +43,7 @@ SRC =	main.c \
 OBJ = $(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
-	gcc -o $(NAME) $(OBJ) -lcsfml-window -lcsfml-system -lcsfml-graphics -lcsfml-audio -g3
+	gcc -o $(NAME) $(OBJ) -lcsfml-window -lcsfml-system -lcsfml-graphics -lcsfml-audio
 
 all : 	$(NAME)
 
