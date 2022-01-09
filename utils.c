@@ -11,8 +11,8 @@ void draw_everything(sfWindow *window, t_obstacle *list, t_par *par,
 t_obj *obj)
 {
     draw_all_bg(window, par);
-    draw_all_obstacle(window, list, par);
     sfRenderWindow_drawSprite(window, obj->sprite, NULL);
+    draw_all_obstacle(window, list, par);
 }
 
 void utils(sfWindow *window, t_obstacle *list, t_par *par, t_obj *obj)

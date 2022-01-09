@@ -16,7 +16,6 @@ t_utils *val)
         if (event.key.code == (sfKeyEscape))
             sfRenderWindow_close(window);
         if (event.key.code == (sfKeyR)) {
-            val = get_par(val->ac, val->av);
             game(val, window);
         }
     }

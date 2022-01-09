@@ -35,11 +35,13 @@ SRC =	main.c \
 		create_texture.c \
 		loop.c \
 		utils.c \
+		utils2.c \
+		events.c \
 
 OBJ = $(SRC:.c=.o)
 
 $(NAME) : $(OBJ)
-	gcc -o $(NAME) $(OBJ) -lcsfml-window -lcsfml-system -lcsfml-graphics -lcsfml-audio
+	gcc -o $(NAME) $(OBJ) -lcsfml-window -lcsfml-system -lcsfml-graphics -lcsfml-audio -g3
 
 all : 	$(NAME)
 

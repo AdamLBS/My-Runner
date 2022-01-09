@@ -42,12 +42,7 @@ void start_menu(t_utils *val, sfRenderWindow *window)
     sfSprite_getLocalBounds(test->sprite).height / 2.0f};
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &event)) {
-            if (event.type == sfEvtClosed)
-                sfRenderWindow_close(window);
-            if (event.key.code == (sfKeyS)) {
-                sfRenderWindow_clear(window, sfBlack);
-                game(val, window);
-            }
+            manage_event_start(event, window, val);
         }
         draw_all_bg(window, par);
         sfSprite_setPosition(test->sprite, test2);
@@ -60,7 +55,6 @@ void start_menu(t_utils *val, sfRenderWindow *window)
 
 void won_menu(t_utils *info, sfRenderWindow *window, t_par *par2)
 {
-    write_score(par2->score);
     t_par *par = create_all_bg(window);
     par->hs = get_highscore();
     t_obj *test = create_title("won_title.png");
