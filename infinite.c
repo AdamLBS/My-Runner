@@ -20,5 +20,6 @@ char *generate_infinitemap(void)
         i++;
     }
     map[size] = '\0';
+    my_putstr(map);
     return map;
 }
